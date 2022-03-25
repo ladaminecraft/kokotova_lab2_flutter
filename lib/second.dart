@@ -1,69 +1,90 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-Future<http.Response> fetchgetFan() {
-  return http.get(Uri.parse('https://www.breakingbadapi.com/api/characters/1'));
+Future<FanHTTP> fetchFanFromServer(String url) async{
+  final response = await http.get(Uri.parse(url)
+  );
+  print(response);
+
+  return FanHTTP.fromJson(jsonDecode(response.body));
 }
 
 class FanHTTP {
-  final int id;
-  final int name;
-  //late final Image image;
+
+  final String name;
+  final String nickname;
+  final String birthday;
+
 
 const FanHTTP({
   required this.name,
-  required this.id,
+  required this.nickname,
+  required this.birthday,
+
   });
 
-  factory FanHTTP.fromJson(Map<String, dynamic> json) {
+  factory FanHTTP.fromJson(List<dynamic> rawData) {
     return FanHTTP(
-      name: json['name'],
-      id: json['id'],
+      name: rawData.first["name"],
+      nickname: rawData.first["nickname"],
+      birthday: rawData.first["birthday"],
     );
   }
 }
 
-void main() => runApp(const SecondPage());
-
 class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key, String url}) : super(key: key);
+  const SecondPage({
+    required this.url,
+    Key? key,}) : super(key: key);
+
+    final String url;
 
   @override
   State<SecondPage> createState() => _SecondPageState();
 }
 
 class _SecondPageState extends State<SecondPage> {
-  late Future<FanHTTP> futureAlbum;
-
-  @override
-  void initState() {
-    super.initState();
-    futureAlbum = getFan(widget.url);
-  }
+  late Future<FanHTTP> futureFanFromServer;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fetch Data Example',
+      title: 'Specifications',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Fetch Data Example'),
+          title: const Text('Specifications'),
         ),
         body: Center(
           child: FutureBuilder<FanHTTP>(
-            future: fetchgetFan,
+            future: fetchFanFromServer(widget.url),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.id);
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(
+                      color: Colors.green,
+                     ),
+                  ),
+                  width: 500,
+                  height: 600,
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                   children:  <Widget>[
+                    Text(snapshot.data!.name),
+                    Text(snapshot.data!.nickname),
+                    Text(snapshot.data!.birthday)]
+                    )
+                );
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-
-              // By default, show a loading spinner.
               return const CircularProgressIndicator();
             },
           ),

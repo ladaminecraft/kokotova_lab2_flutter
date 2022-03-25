@@ -40,12 +40,12 @@ class _MyHomePageFromState extends State<MyHomePage> {
             children: <Widget>[
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
-                child: Text('Press if you like breakingbad',
+                child: Text('Get info about one of your 57 crushes',
                     style: TextStyle(fontSize: 15, color: Colors.pink)),
               ),
               const Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('Prove that you are fan. Print the secret http',
+                child: Text("https://www.breakingbadapi.com/api/",
                     style: TextStyle(fontSize: 16, color: Colors.black)),
               ),
               Padding(
@@ -55,8 +55,8 @@ class _MyHomePageFromState extends State<MyHomePage> {
                   child: TextFormField(
                     controller: _controller,
                     decoration: InputDecoration(
-                      labelText: 'Code = URL',
-                      errorText: texterror ? 'You are not a real fan' : null,
+                      labelText: "URL + your characters's id",
+                      errorText: texterror ? 'Press number from 1 to 57' : null,
                     ),
                   ),
                 ),
@@ -82,7 +82,7 @@ class _MyHomePageFromState extends State<MyHomePage> {
                     _controller.clear();
                   }
                 },
-                child: const Text("Check"),
+                child: const Text("Get"),
               ),
             ],
           ),
