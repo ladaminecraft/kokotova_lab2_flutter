@@ -41,12 +41,12 @@ class _MyHomePageFromState extends State<MyHomePage> {
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
                 child: Text('Get info about one of your 57 crushes',
-                    style: TextStyle(fontSize: 15, color: Colors.pink)),
+                    style: TextStyle(fontSize: 25, color: Colors.pink)),
               ),
               const Padding(
                 padding: EdgeInsets.all(8),
                 child: Text("https://www.breakingbadapi.com/api/",
-                    style: TextStyle(fontSize: 16, color: Colors.black)),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -56,7 +56,7 @@ class _MyHomePageFromState extends State<MyHomePage> {
                     controller: _controller,
                     decoration: InputDecoration(
                       labelText: "URL + your characters's id",
-                      errorText: texterror ? 'Press number from 1 to 57' : null,
+                      errorText: texterror ? 'Press ulr + number from 1 to 57' : null,
                     ),
                   ),
                 ),

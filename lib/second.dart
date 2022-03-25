@@ -35,6 +35,7 @@ const FanHTTP({
   }
 }
 
+
 class SecondPage extends StatefulWidget {
   const SecondPage({
     required this.url,
@@ -48,18 +49,17 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   late Future<FanHTTP> futureFanFromServer;
+  final _formKey = GlobalKey<FormState>();
+
+
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Specifications',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
+    return Scaffold(
+      key: _formKey,
+       appBar: AppBar(
+        title: Text("Info"),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Specifications'),
-        ),
         body: Center(
           child: FutureBuilder<FanHTTP>(
             future: fetchFanFromServer(widget.url),
@@ -89,7 +89,7 @@ class _SecondPageState extends State<SecondPage> {
             },
           ),
         ),
-      ),
+      
     );
   }
 }
