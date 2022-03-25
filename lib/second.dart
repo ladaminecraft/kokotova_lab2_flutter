@@ -7,7 +7,7 @@ import 'dart:async';
 Future<FanHTTP> fetchFanFromServer(String url) async{
   final response = await http.get(Uri.parse(url)
   );
-  print(response);
+  
 
   return FanHTTP.fromJson(jsonDecode(response.body));
 }
@@ -77,9 +77,9 @@ class _SecondPageState extends State<SecondPage> {
                   child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                    children:  <Widget>[
-                    Text(snapshot.data!.name),
-                    Text(snapshot.data!.nickname),
-                    Text(snapshot.data!.birthday)]
+                    Text(snapshot.data!.name, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
+                    Text(snapshot.data!.nickname, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
+                    Text(snapshot.data!.birthday, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35))]
                     )
                 );
               } else if (snapshot.hasError) {
