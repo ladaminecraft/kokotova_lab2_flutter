@@ -17,12 +17,14 @@ class FanHTTP {
   final String name;
   final String nickname;
   final String birthday;
+  final String img;
 
 
 const FanHTTP({
   required this.name,
   required this.nickname,
   required this.birthday,
+  required this.img,
 
   });
 
@@ -31,6 +33,7 @@ const FanHTTP({
       name: rawData.first["name"],
       nickname: rawData.first["nickname"],
       birthday: rawData.first["birthday"],
+      img: rawData.first["img"],
     );
   }
 }
@@ -66,12 +69,8 @@ class _SecondPageState extends State<SecondPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(
-                      color: Colors.green,
-                     ),
-                  ),
+                  margin: const EdgeInsets.all(10),
+                  color: Color.fromARGB(255, 255, 0, 98),
                   width: 500,
                   height: 600,
                   child: Column(
@@ -79,7 +78,8 @@ class _SecondPageState extends State<SecondPage> {
                    children:  <Widget>[
                     Text(snapshot.data!.name, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
                     Text(snapshot.data!.nickname, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
-                    Text(snapshot.data!.birthday, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35))]
+                    Text(snapshot.data!.birthday, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
+                    Image.network(snapshot.data!.img, height: 350),]
                     )
                 );
               } else if (snapshot.hasError) {

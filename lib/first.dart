@@ -33,7 +33,7 @@ class _MyHomePageFromState extends State<MyHomePage> {
               color: Colors.green,
             ),
           ),
-          width: 500,
+          width: 600,
           height: 600,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +45,7 @@ class _MyHomePageFromState extends State<MyHomePage> {
               ),
               const Padding(
                 padding: EdgeInsets.all(8),
-                child: Text("https://www.breakingbadapi.com/api/",
+                child: SelectableText("https://www.breakingbadapi.com/api/characters/",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black)),
               ),
               Padding(
@@ -64,7 +64,7 @@ class _MyHomePageFromState extends State<MyHomePage> {
               const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () {
-                  if (_controller.text.isEmpty || !isURL(_controller.text)) {
+                  if (_controller.text.isEmpty || _controller.text.endsWith('/0') || !isURL(_controller.text) || _controller.text.endsWith('/') || _controller.text.contains(RegExp(r'[58-9999999999999999]')) ) {
                     setState(() {
                       texterror = true;
                     });
