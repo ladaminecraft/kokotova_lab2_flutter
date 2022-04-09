@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:async';
+
+import 'provider.dart';
 
 Future<FanHTTP> fetchFanFromServer(String url) async{
   final response = await http.get(Uri.parse(url)
@@ -75,11 +78,15 @@ class _SecondPageState extends State<SecondPage> {
                   height: 600,
                   child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                   children:  <Widget>[
+                   children: [
+                     SwitchListTile.adaptive(value: context.watch<Prov>().change(snapshot.data!.name),
+                      onChanged: context.read<Prov>().change(snapshot.data!.name))
+                   ]
+                   /*<Widget>[
                     Text(snapshot.data!.name, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
                     Text(snapshot.data!.nickname, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
                     Text(snapshot.data!.birthday, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35)),
-                    Image.network(snapshot.data!.img, height: 350),]
+                    Image.network(snapshot.data!.img, height: 350),] */
                     )
                 );
               } else if (snapshot.hasError) {

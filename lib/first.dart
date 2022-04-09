@@ -1,5 +1,7 @@
+import 'package:flut/provider.dart';
 import 'package:flut/second.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -64,6 +66,7 @@ class _MyHomePageFromState extends State<MyHomePage> {
               const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () {
+                  context.read<Prov>().change(_controller.text);
                   if (_controller.text.isEmpty || _controller.text.endsWith('/0') || !isURL(_controller.text) || _controller.text.endsWith('/') || _controller.text.contains(RegExp(r'[58-9999999999999999]')) ) {
                     setState(() {
                       texterror = true;
